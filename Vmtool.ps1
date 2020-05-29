@@ -386,7 +386,6 @@ function Show-VMTool_psf {
 		#takes the selection in the previous function to a string, to be used as a variable
 		try
 		{
-			#$Cred = Import-Clixml "\\bamcclss0100\servers$\Credentials.xml"
 			$viServer = Connect-VIServer $dropdown_vcenter.SelectedItem -User  -Password ''
 			#Loads the ShowVMs function should a connection be made
 			ShowVMs
