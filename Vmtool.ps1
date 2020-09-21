@@ -364,7 +364,7 @@ function Show-VMTool_psf {
 		$VMToolsDT = ConvertTo-DataTable -InputObject $VMTools
 		Load-DataGridView -DataGridView $datagridview_VMTools -Item $VMToolsDT
 		
-		$textbox_VMCreateDatastore.Text = Get-Datastore | ? { $_.Name -like "BAMC Datastore*" -and $_.Name -notlike "*101*" -and $_.Name -notlike "*100*" } | Sort-Object -Property FreeSpaceGB -Descending | Select -first 1
+		$textbox_VMCreateDatastore.Text = Get-Datastore | ? { $_.Name -like "*" -and $_.Name -notlike "" -and $_.Name -notlike "" } | Sort-Object -Property FreeSpaceGB -Descending | Select -first 1
 		
 		$Folders = get-folder | Where-Object { $_.name -notmatch "NoDR" } | Sort
 		foreach ($Folder in $Folders) { $combobox1_VMCreateFolders.Items.Add($Folder) }
@@ -374,7 +374,7 @@ function Show-VMTool_psf {
 		$VLANs = Get-VirtualPortGroup | Sort | Select -ExpandProperty Name
 		foreach ($VLAN in $VLANs){$combobox_VMCreateVLANs.Items.Add($VLAN)}
 		
-		$textbox_VMCreateResourcePool.Text = Get-Cluster | where { $_.Name -like "*BAMC Cluster*" } | Select -ExpandProperty Name
+		$textbox_VMCreateResourcePool.Text = Get-Cluster | where { $_.Name -like "**" } | Select -ExpandProperty Name
 		$tabcontrol_Servers.Visible = $true
 		
 	}#endregion
@@ -472,7 +472,7 @@ function Show-VMTool_psf {
 		
 		$foldername = New-Object System.Windows.Forms.FolderBrowserDialog
 		$foldername.Description = "Select a folder"
-		$foldername.SelectedPath = "\\bamclts4\archive\zz-Old_VMs"
+		$foldername.SelectedPath = ""
 		
 		if ($foldername.ShowDialog() -eq "OK")
 		{
